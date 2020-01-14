@@ -38,10 +38,13 @@ git init
 
 git pull
 
-a) 执行增加命令，如下：git add .
+a) 执行增加命令，如下：git add -A
 b) 执行提交命令，如下：git commit –m ""
 c) 执行推送命令，如下：git push 
 
+常用命令：
+  - cat readme.txt 查看文件内容
+  - git diff index.html 查看修改内容
 
 
 
