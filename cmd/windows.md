@@ -1,4 +1,4 @@
-** CTRL + R **
+**CTRL + R**
 
 sysdm.cpl 系统属性
 services.msc 服务
@@ -8,7 +8,7 @@ regedit 注册表
 sysdm.cpl 系统属性
 
 
-** CMD **
+**CMD**
 
 sc delete servicename 删除servicename服务
 
@@ -19,14 +19,14 @@ gradlew jmGui -PenvironmentName=qa1    jMeter
 gradlew customizeEI     build ESB EI
 
 
-** VS CODE **
+**VS CODE**
 
 Ctrl + M + M: 折叠或者展开当前方法
 Ctrl + M + L:  展开所有方法
 Alt + Q: 选择语言模式
 
 
-** GIT START UP **
+**GIT START UP**
 
 git config –global user.name "用户名"
 git config –global user.email "邮箱"
