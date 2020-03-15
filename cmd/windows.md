@@ -18,17 +18,21 @@
   - Alt + Q: 选择语言模式
 
 **GIT SKILLS**  
+> [Download](https://npm.taobao.org/mirrors/git-for-windows/)
 1. Global Config  
-git config –global user.name "用户名"  
-git config –global user.email "邮箱"  
+git config --global user.name "用户名"  -> git config --global user.name "LLasombra"  
+git config --global user.email "邮箱"   -> git config --global user.email "minglin.tang@icloud.com"  
+git config --list 查看配置信息
 2. UserInfo config  
-ssh-keygen –t rsa –C "邮箱地址" `注意ssh-keygen之间是没有空格的,其他的之间是有空格的`  
-ssh –T git@github.com  测试  
+ssh-keygen -t rsa -C "邮箱地址" `注意ssh-keygen之间是没有空格的,其他的之间是有空格的`  
+cd ~/.ssh  
+cat id_rsa.pub  
+ssh -T git@github.com  测试  
 3. git init
 4. git pull
 
 a) 执行增加命令，如下：git add . `不包括被删除的文件` / git add -A `包括被删除的文件`  
-b) 执行提交命令，如下：git commit –m ""
+b) 执行提交命令，如下：git commit -m ""
 c) 执行推送命令，如下：git push origin xxx-branch
 
 **常用命令：**  
