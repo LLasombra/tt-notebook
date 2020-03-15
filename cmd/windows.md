@@ -84,7 +84,7 @@ c) 执行推送命令，如下：git push origin xxx-branch
         .   英文句点
         !   感叹号
       ```
-    3. 数学公式, 使用两个美元符 $$ 包裹 TeX 或 LaTeX 格式的数学公式来实现,问答和文章页会根据需要加载 Mathjax 对数学公式进行渲染, 如: 
+    3. 数学公式, 使用`两个美元符 $$ 包裹 TeX 或 LaTeX 格式`的数学公式来实现,问答和文章页会根据需要加载 Mathjax 对数学公式进行渲染, 如: 
       ```
         $$
         \mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix} 
