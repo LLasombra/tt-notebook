@@ -32,7 +32,7 @@ ssh -T git@github.com  测试
 4. git pull
 5. git branch -D branchName 删除本地分支
 6. git push origin --delete branchName 删除远端分支
-7. git reset --mixed 21ec4bcc781b65fed901c1e671687040e793ec72 .\Migrations\TableOperationDbContextModelSnapshot.cs
+7. git reset --mixed 21ec4bcc781b65fed901c1e671687040e793ec72 .\Migrations\TableOperationDbContextModelSnapshot.cs 将指定文件回退到指定版本
 
 a) 执行增加命令，如下：git add . `不包括被删除的文件` / git add -A `包括被删除的文件`  
 b) 执行提交命令，如下：git commit -m ""
