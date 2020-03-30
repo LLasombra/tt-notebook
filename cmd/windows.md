@@ -17,6 +17,13 @@
   - Ctrl + M + L:  展开所有方法
   - Alt + Q: 选择语言模式
 
+**CHROME SHORTKEY**
+  - Ctrl+T 打开新标签页
+  - Ctrl+Shift+T 重新打开上次关闭的标签页
+  - Ctrl+Tab 或 Ctrl+PgDown 切换到下一个标签页
+  - Ctrl+Shift+Tab 或 Ctrl+PgUp 切换到上一个标签页
+  - Ctrl+U 查看源代码
+
 **GIT SKILLS**  
 > [Download](https://npm.taobao.org/mirrors/git-for-windows/)
 1. Global Config  
