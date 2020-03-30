@@ -33,6 +33,24 @@ ssh -T git@github.com  测试
 5. git branch -D branchName 删除本地分支
 6. git push origin --delete branchName 删除远端分支
 7. git reset --mixed 21ec4bcc781b65fed901c1e671687040e793ec72 .\Migrations\TableOperationDbContextModelSnapshot.cs 将指定文件回退到指定版本
+8. 在一台电脑兼容GitHub和GitLab: [文章1](https://www.cnblogs.com/dennyzhangdd/p/10607472.html), [文章2](https://zhuanlan.zhihu.com/p/34405577)
+    > ssh-keygen -t rsa -C "email地址"   -f github    其中-C 后面的是注册github时用的邮箱，-f 后面是生成秘钥的名称
+    ``` conf
+    # gitlab
+    Host git.augmentum.com.cn
+    User timothy.tang
+    HostName git.augmentum.com.cn
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_rsa
+
+    # github
+    Host github.com
+    User LLasombra
+    Hostname github.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/github
+    Port 443
+    ```
 
 a) 执行增加命令，如下：git add . `不包括被删除的文件` / git add -A `包括被删除的文件`  
 b) 执行提交命令，如下：git commit -m ""
@@ -77,29 +95,29 @@ c) 执行推送命令，如下：git push origin xxx-branch
     1. 支持HTML元素, 如: `<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Del</kbd>` --> 使用 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Del</kbd> 重启电脑
     2. 转义：使用`反斜杠`转义特殊字符  
       支持以下这些符号前面加上反斜杠来帮助插入普通的符号:  
-      ```
-        \   反斜线
-        `   反引号
-        *   星号
-        _   下划线
-        {}  花括号
-        []  方括号
-        ()  小括号
-        #   井字号
-        +   加号
-        -   减号
-        .   英文句点
-        !   感叹号
-      ```
+        ```
+          \   反斜线
+          `   反引号
+          *   星号
+          _   下划线
+          {}  花括号
+          []  方括号
+          ()  小括号
+          #   井字号
+          +   加号
+          -   减号
+          .   英文句点
+          !   感叹号
+        ```
     3. 数学公式, 使用`两个美元符 $$ 包裹 TeX 或 LaTeX 格式`的数学公式来实现,问答和文章页会根据需要加载 Mathjax 对数学公式进行渲染, 如: 
-      ```
-        $$
-        \mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix} 
-        \mathbf{i} & \mathbf{j} & \mathbf{k} \\
-        \frac{\partial X}{\partial u} &  \frac{\partial Y}{\partial u} & 0 \\
-        \frac{\partial X}{\partial v} &  \frac{\partial Y}{\partial v} & 0 \\
-        \end{vmatrix}
-        ${$tep1}{\style{visibility:hidden}{(x+1)(x+1)}}
-        $$
-      ``` 
+        ```
+          $$
+          \mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix} 
+          \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+          \frac{\partial X}{\partial u} &  \frac{\partial Y}{\partial u} & 0 \\
+          \frac{\partial X}{\partial v} &  \frac{\partial Y}{\partial v} & 0 \\
+          \end{vmatrix}
+          ${$tep1}{\style{visibility:hidden}{(x+1)(x+1)}}
+          $$
+        ``` 
     4. typora 画流程图、时序图(顺序图)、甘特图:  [链接](https://www.runoob.com/markdown/md-advance.html)
