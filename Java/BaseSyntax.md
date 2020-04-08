@@ -162,3 +162,6 @@
   - 如果匹配成功的 case 语句块中没有 break 语句, 从当前 case 开始, 后续所有 case 的值都会执行, 直到遇到break则跳出switch
 
 ### Number And Math
+  - 所有基本数值类型的包装类(Integer、Long、Byte、Double、Float、Short)都是抽象类Number的子类
+  - 装箱, 拆箱
+  
