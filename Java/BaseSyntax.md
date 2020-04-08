@@ -164,4 +164,13 @@
 ### Number And Math
   - 所有基本数值类型的包装类(Integer、Long、Byte、Double、Float、Short)都是抽象类Number的子类
   - 装箱, 拆箱
-  
+  - Number & Math 类方法
+    > xxxValue(): 用于将 Number 对象转换为 xxx 数据类型的值并返回
+    > compareTo(): 方法用于将 Number 对象与方法的参数进行比较
+    > equals(): 方法用于判断 Number 对象与方法的参数进是否相等
+    > valueOf(): 方法用于返回给定参数的原生 Number 对象值，参数可以是原生数据类型, String等
+    > abs(): 返回参数的绝对值
+    > random(): 方法用于返回一个随机数，随机数范围为 0.0 =< Math.random < 1.0
+
+### Character Class
+
