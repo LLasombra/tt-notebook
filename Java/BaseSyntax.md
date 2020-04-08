@@ -1,4 +1,4 @@
-**Setup**
+### Setup
   - [Download JDK](https://www.oracle.com/java/technologies/javase-downloads.html)
   - Config System Environment -> Run -> sysdm.cpl
       > 变量名：JAVA_HOME -> 变量值：C:\Program Files (x86)\Java\jdk1.8.0_91  //要根据自己的实际路径配置
@@ -8,7 +8,7 @@
       > [Eclipse](http://www.eclipse.org/downloads/packages/)
       > [IntelliJ IDEA](https://www.jetbrains.com/idea/download/#section=windows)
 
-**Coding Style**
+### Coding Style
   - Java: 
       > 大小写敏感
       > 类名: 大写开头，驼峰
@@ -23,9 +23,9 @@
   - 关键字: native, strictfp, transient, volatile, instanceof, assert, synchronized, goto, const
   - 一个源文件只能有`一个public类`, 但可以有`多个非public`类, 并且源文件的名称应该和public类的类名保持一致
 
-**Class And Object**
+### Class And Object
 
-**DataTypes**
+### DataTypes
 - *Basic DataTypes*
   - byte: 1个字节(8位, 即[-128(-2^7) - 0 - 127(2^7-1)]), 有符号, 用在大型数组中节约空间, 主要代替整数, 默认值 0
   - short: 2个字节, 有符号, 也可以像 byte 那样节省空间, 默认值 0
@@ -58,7 +58,7 @@
   - 整数的默认类型是 int
   - 浮点型不存在这种情况，因为在定义 float 类型时必须在数字后面跟上 F 或者 f
 
-**Variable Types**
+### Variable Types
   - 局部变量
     > 访问修饰符不能用于局部变量
     > 局部变量是在`栈(后进先出)`上分配的
@@ -73,7 +73,7 @@
     > 静态变量还可以在静态语句块中初始化
     > 静态变量可以通过：`ClassName.VariableName`的方式访问
 
-**Modifier Types**
+### Modifier Types
   - *访问修饰符*
     - `public`: 对所有类可见
       > main() 方法必须设置成公有的，否则，Java 解释器将不能运行该类
@@ -105,7 +105,7 @@
     - transient: 序列化的对象包含被 transient 修饰的实例变量时, JVM会忽略transient变量的原始值并将默认值保存到文件中
     - volatile: 修饰的成员变量在每次被线程访问时, 都会强制从共享内存中重新读取该成员变量的值, 当变量改变时, 会强制线程将变化值回写到共享内存。这样在任何时刻, 两个不同的线程总是看到某个成员变量的同一个值。一个 volatile 对象引用可能是 null
 
-**Java Operators**  
+### Java Operators  
 - 算术运算符: +, -, *, /, &, %, ++, --
   - 前缀自增自减法(++a, --a): 先进行自增或者自减运算，再进行表达式运算
   - 后缀自增自减法(a++, a--): 先进行表达式运算，再进行自增或者自减运算
@@ -129,17 +129,36 @@
     ```
     如果被比较的对象兼容于右侧类型,该运算符仍然返回true
 
-**Loop**
+### Loop
   - while(布尔表达式) {}
   - do {} while(布尔表达式)
   - for(初始化 ; 布尔表达式 ; 更新) {}
   - for(声明元素名 : 数组名或返回数组的方法名) {}
   > break, continue
 
-**Condition**
+### Condition
   - if() {}
   - if() {} else {}
   - if() {} else if() {} else {}
   - 嵌套
 
-**Switch Case**
+### Switch Case
+  > 判断一个变量与一系列值中某个值是否相等，每个值称为一个分支
+  ``` Java
+    switch(expression) {
+      case value :
+        //语句
+        break; //可选
+      case value :
+        //语句
+        break; //可选
+      //你可以有任意数量的case语句
+      default : //可选
+        //语句
+    }
+  ```
+  - switch变量可以是: byte, short, int, char, String(JDK 7开始)。case标签必须为字符串常量或字面量, 且数据类型与变量的相同
+  - default 分支不需要 break 语句, 可以在任何位置，但通常在最后一个
+  - 如果匹配成功的 case 语句块中没有 break 语句, 从当前 case 开始, 后续所有 case 的值都会执行, 直到遇到break则跳出switch
+
+### Number And Math
