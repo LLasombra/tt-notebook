@@ -173,4 +173,13 @@
     > random(): 方法用于返回一个随机数，随机数范围为 0.0 =< Math.random < 1.0
 
 ### Character Class
+  - 将一个char类型的参数传递给需要一个Character类型参数的方法时，那么编译器会自动地将char类型参数转换为Character对象。 这种特征称为装箱，反过来称为拆箱
+  - Character 类方法
+    > isLetter(): 方法用于判断指定字符是否为字母
+    > isDigit(): 方法用于判断指定字符是否为数字
+    > isUpperCase(), toUpperCase(): 是否是大写字母, 指定字母的大写形式
+    > isLowerCase(), toLowerCase(): 是否是小写字母, 指定字母的小写形式
 
+### String Class
+  - 在 Java 中字符串属于对象，并提供了 String 类来创建和操作字符串
+  
