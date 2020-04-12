@@ -182,4 +182,40 @@
 
 ### String Class
   - 在 Java 中字符串属于对象，并提供了 String 类来创建和操作字符串
-  
+  - String 类的静态方法 format() 能用来创建可复用的格式化字符串
+    ``` Java
+    String fs;
+    fs = String.format("浮点型变量的值为 " +
+      "%f, 整型变量的值为 " +
+      " %d, 字符串变量的值为 " +
+      " %s", floatVar, intVar, stringVar);
+    ```
+  - String 类方法
+    - length() 返回字符串对象包含的字符数
+    - char charAt(int index)用于返回指定索引处(0 到 length() - 1)的字符
+    - int compareTo(Object o), int compareTo(String anotherString), int compareToIgnoreCase(String str)
+    - boolean equalsIgnoreCase(String anotherString) 将字符串与指定的对象比较，不考虑大小写
+    - boolean endsWith(String suffix) 方法用于测试字符串是否以指定的后缀结束
+      > startsWith()
+    - int indexOf(int ch): 返回指定字符在字符串中第一次出现处的索引
+    - int lastIndexOf(int ch): 返回指定字符在此字符串中最后一次出现处的索引
+    - String replace(char oldChar, char newChar) 用 newChar 字符替换字符串中出现的所有 oldChar 字符，并返回替换后的新字符串
+    - replaceAll(), replaceFirst()
+    - String[] split() 方法根据匹配给定的正则表达式来拆分字符串
+      > `. $ | * `等转义字符，必须得加 `\\`
+      > 多个分隔符，可以用` | `作为连字符
+    - substring() 方法返回字符串的子字符串
+    - toUpperCase() 方法将字符串小写字符转换为大写, toLowerCase() 方法将字符串转换为小写
+    - trim() 方法用于删除字符串的头尾空白符
+
+### StringBuffer & StringBuilder
+  - 与String相比, StringBuffer和StringBuilder类的对象能够被多次的修改，并且不产生新的未使用对象
+  - StringBuilder: 线程不安全, 但性能更好, 单线程中使用, 常用
+  - StringBuffer: 线程安全(方法都使用了synchronized), 多线程中使用
+  - 主要方法:
+    - append(String s) 将指定的字符串追加到此字符序列
+    - reverse() 字符序列反转
+    - replace(int start, int end, String str) 使用给定 str 中的字符替换此序列start - end的的字符
+
+### Array
+  - 
