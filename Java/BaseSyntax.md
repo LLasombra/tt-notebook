@@ -218,4 +218,31 @@
     - replace(int start, int end, String str) 使用给定 str 中的字符替换此序列start - end的的字符
 
 ### Array
-  - 
+  - 用来存储固定大小的同类型元素
+    ``` Java
+    dataType[] arrayRefVar = new dataType[arraySize];
+    dataType[] arrayRefVar = {value0, value1, ..., valuen};
+
+    int[] a = new int[10];
+    ```
+  - 数组的元素是通过索引访问的, 索引值从 0 到 arrayRefVar.length - 1
+  - 多维数组 可以看成是数组的数组, 比如二维数组就是一个特殊的一维数组, 其每一个元素都是一个一维数组
+    ``` Java
+    type[][] typeName = new type[typeLength1][typeLength2];
+    String[][] str = new String[3][4];
+
+    String[][] s = new String[2][];
+    s[0] = new String[2];
+    s[1] = new String[3];
+    s[0][0] = new String("Good");
+    s[0][1] = new String("Luck");
+    s[1][0] = new String("to");
+    s[1][1] = new String("you");
+    s[1][2] = new String("!");
+    ```
+  - java.util.Arrays 类能方便地操作数组，它提供的所有方法都是静态的
+    - void sort(Object[] a): 升序排列
+    - int binarySearch(Object[] a, Object key): 对排序好的数组进行二分查找法操作
+
+### DateTime
+  
