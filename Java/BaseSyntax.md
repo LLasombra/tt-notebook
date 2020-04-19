@@ -245,4 +245,67 @@
     - int binarySearch(Object[] a, Object key): 对排序好的数组进行二分查找法操作
 
 ### DateTime
-  
+  - **java.util.Date** 类方法:
+    - boolean after(Date date), boolean before(Date date): 调用此方法的Date对象在指定日期之后/之前返回true
+    - int compareTo(Date date), boolean equals(Object date): 比较当调用此方法的Date对象和指定日期
+    - long getTime(): 返回时间戳, void setTime(long time)毫秒数设置时间和日期
+  - **SimpleDateFormat** 选择任何用户自定义日期格式化
+    ``` Java
+    SimpleDateFormat ft = new SimpleDateFormat("MMM d, yyyy-MM-dd HH:mm:ss:SSS", Locale.ENGLISH);
+    System.out.println(ft.format(new Date()));
+
+    SimpleDateFormat ft2 = new SimpleDateFormat("yyyy-MM-dd");
+    System.out.println(ft.format(ft2.parse("1818-11-11")));
+    ```
+    - 有的格式分大小写, 如 MM 是月份，mm 是分；HH 是 24 小时制，而 hh 是 12 小时制, ss 秒, SSS 毫秒
+    - parse() 解析字符串为时间
+  - **printf**格式化日期
+    - 以 %t 开头并且以(c 包括全部日期和时间信息, F, D, r, T, R)中的一个字母结尾
+  - sleep(): 使当前线程进入停滞状态(阻塞当前线程), 让出CPU的使用、目的是不让当前线程独自霸占该进程所获的CPU资源，以留一定时间给其他线程执行的机会, `Thread.sleep(1000 * 3);  // 休眠3秒`
+  - 测量时间: System.currentTimeMillis() 之差
+  - **Calendar** 抽象类: 设置和获取日期数据的特定部分, 公历日历
+    - 创建Calendar对象:
+      ``` Java
+      Calendar c = Calendar.getInstance();  // c默认是当前日期
+      c.set(2020, 4 - 1, 18);  // 创建一个代表2020年4月18日的Calendar对象
+      ```
+    - 对象信息的设置:
+      - Set设置
+        > 调用 public final void set(int year,int month,int date)
+        > 如果只设定某个字段，例如年份的值: public void set(int field, int value)
+        > c.set(Calendar.YEAR, 2008)
+      - Add设置
+        > c对象的日期减去10，也就是c表示为10天前的日期
+        > c.add(Calendar.DATE, -10);
+    - Calender的月份是从0开始的，但日期和年份是从1开始的
+  - **GregorianCalendar** 类是Calendar抽象类的一个具体实现
+    - Calendar.getInstance()返回一个默认用当前的语言环境和时区初始化的GregorianCalendar对象
+    - 构造方法如: 
+      ``` Java
+      GregorianCalendar()
+      GregorianCalendar(int year, int month, int date)
+      GregorianCalendar(TimeZone zone)
+      ```
+    - 常用方法如: 
+      ``` Java
+      void add(int field, int amount)  // 根据日历规则，将指定的（有符号的）时间量添加到给定的日历字段中
+      int get(int field)  // 获取指定字段的时间值
+      Date getTime()  // 获取日历当前时间
+      TimeZone getTimeZone()  // 获取时区
+      boolean isLeapYear(int year)  // 确定给定的年份是否为闰年
+      void set(int field, int value)  // 用给定的值设置时间字段
+      void set(int year, int month, int date)  // 设置年、月、日的值
+      void setTime(Date date)
+      void setTimeInMillis(long millis)
+      void setTimeZone(TimeZone value)
+      ```
+    ``` Java
+    GregorianCalendar gcalendar = new GregorianCalendar();
+    gcalendar.get(Calendar.MONTH);
+    ```
+
+### Regular Expression
+  - 定义了字符串的模式, 可以用来搜索、编辑或处理文本, 并不仅限于某一种语言，但是在每种语言中有细微的差别
+
+### Java Method
+  - 
