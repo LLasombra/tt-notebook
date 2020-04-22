@@ -308,4 +308,57 @@
   - 定义了字符串的模式, 可以用来搜索、编辑或处理文本, 并不仅限于某一种语言，但是在每种语言中有细微的差别
 
 ### Java Method
-  - 
+  - 方法是解决一类问题的步骤的有序组合, 能使程序变得更简短而清晰, 有利于程序维护, 可以提高程序开发的效率和代码重用性
+  - 命名规则: 
+    - 第一个单词以小写字母开头, 后面单词则用大写字母开头, 不使用连接符
+    - 下划线可能出现在 JUnit 测试方法名称中用以分隔名称的逻辑组件。一个典型的模式是: `test<MethodUnderTest>_<state>`, 例如 `testPop_emptyStack`
+  - 方法包含一个方法头和一个方法体
+    ![方法结构](https://www.runoob.com/wp-content/uploads/2013/12/12-130Q1220955916.jpg)
+  - 参数列表: 是指方法的参数类型、顺序和参数的个数
+  - `方法签名`: 方法名和参数列表
+  - 方法调用:
+    - 当方法返回一个值的时候, 方法调用通常被当做一个值, 如: `int larger = max(30, 40);`
+    - 当方法返回值是void, 方法调用一定是一条语句
+  - 命令行参数: 是在执行程序时候紧跟在程序名字后面的信息, main(String args[])
+    ``` Java
+      $ javac CommandLine.java 
+      $ java CommandLine this is a command line 200 -100
+    ```
+  - 可变参数: 在方法声明中，在指定参数类型后加一个省略号: `...`
+    > 一个方法中只能指定一个可变参数，它必须是方法的最后一个参数, 编译器会将其转型为一个数组
+  - finalize() 方法: 在对象被垃圾收集器析构(回收)之前调用, 用来清除回收对象
+    ``` Java
+      public class Test1 {
+          public static void main(String[] args) {
+              Cake c1 = new Cake(1);
+              Cake c2 = new Cake(2);
+              Cake c3 = new Cake(3);
+              c2 = c3 = null;
+              System.gc(); // 调用Java垃圾收集器
+          }
+      }
+
+      class Cake {
+          private int id;
+
+          public Cake(int id) {
+              this.id = id;
+              System.out.println("Cake Object" + id + " is created");
+          }
+
+          @Override
+          protected void finalize() throws java.lang.Throwable {
+              super.finalize();
+              System.out.println("Cake Object" + id + " is disposed");
+          }
+      }
+
+      Cake Object1 is created
+      Cake Object2 is created
+      Cake Object3 is created
+      Cake Object2 is disposed
+      Cake Object3 is disposed
+    ```
+
+### Files IO
+  
