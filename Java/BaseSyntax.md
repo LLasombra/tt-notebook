@@ -111,9 +111,9 @@
   - 后缀自增自减法(a++, a--): 先进行表达式运算，再进行自增或者自减运算
 - 关系运算符: ==, !=, >, >=, <, <=
 - 位运算符
-  - `&  ` 相对应位都是 1，则结果为 1，否则为 0
-  - `|  ` 相对应位都是 0，则结果为 0，否则为 1
-  - `^  ` 如果相对应位值相同，则结果为0，否则为1
+  - `&  ` 与 相对应位都是 1，则结果为 1，否则为 0
+  - `|  ` 或 相对应位都是 0，则结果为 0，否则为 1
+  - `^  ` 异或 如果相对应位值相同，则结果为0，否则为1
   - `~  ` 按位取反运算符翻转操作数的每一位，即0变成1，1变成0
   - `<< ` 按位左移运算符。左操作数按位左移右操作数指定的位数
   - `>> ` 按位右移运算符。左操作数按位右移右操作数指定的位数
@@ -306,6 +306,81 @@
 
 ### Regular Expression
   - 定义了字符串的模式, 可以用来搜索、编辑或处理文本, 并不仅限于某一种语言，但是在每种语言中有细微的差别
+  - java.util.regex 包主要包括以下三个类:
+    - Pattern 类: 是一个正则表达式的编译表示, 没有公共构造方法
+    - Matcher 类: 是对输入字符串进行解释和匹配操作的引擎, 没有公共构造方法
+    - PatternSyntaxException 类: 非强制异常类，它表示一个正则表达式模式中的语法错误
+      - public String getDescription() 获取错误的描述
+      - public int getIndex() 获取错误的索引
+      - public String getPattern() 获取错误的正则表达式模式
+      - public String getMessage() 返回多行字符串，包含语法错误及其索引的描述、错误的正则表达式模式和模式中错误索引的可视化指示
+    ``` Java
+      // 按指定模式在字符串查找
+      String line = "This order was placed for QT3000! OK?";
+      String pattern = "(\\D*)(\\d+)(.*)";
+      // 创建 Pattern 对象
+      Pattern r = Pattern.compile(pattern);
+      // 现在创建 matcher 对象
+      Matcher m = r.matcher(line);
+      if (m.find()) {
+         System.out.println("Found value: " + m.group(0) );
+         System.out.println("Found value: " + m.group(1) );
+         System.out.println("Found value: " + m.group(2) );
+         System.out.println("Found value: " + m.group(3) ); 
+      } else {
+         System.out.println("NO MATCH");
+      }
+
+      Found value: This order was placed for QT3000! OK?
+      Found value: This order was placed for QT
+      Found value: 3000
+      Found value: ! OK?
+    ```
+  - 捕获组: 把多个字符当一个单独单元进行处理的方法，它通过对括号内的字符分组来创建
+    - 如: `((A)(B(C)))` 有 `((A)(B(C))), (A), (B(C)), (C)` 四个组
+    - 可以通过调用 matcher 对象的 groupCount 方法来查看表达式有多少个分组
+  - 正则表达式语法
+    - Java 中，`\\` 表示：我要插入一个正则表达式的反斜线，所以其后的字符具有特殊的意义, 所以表示一位数字的正则表达式是 `\\d`, 而表示一个普通的反斜杠是 `\\\\`
+    - 字符说明:
+      - `\`: 将下一字符标记为特殊字符、文本、反向引用或八进制转义符
+      - `x|y`: 匹配 x 或 y, 如`z|food` 匹配"z"或"food"。`(z|f)ood` 匹配"zood"或"food"
+      - `^`: 匹配输入字符串开始的位置, `$`: 结尾的位置
+      - `.`: 匹配除"\r\n"之外的任何单个字符
+      - `*`: 零次或多次匹配前面的字符或子表达式, `+`: 一次或多次 `等效于 {1,}`,  `?`: 零次或一次 `等效于 {0, 1}`
+      - `{n}`: n 是非负整数。正好匹配 n 次, `{n,}`: 至少匹配 n 次 ,`{n, m}`: 匹配至少 n 次，至多 m 次
+      - `[xyz]`: 字符集, `[^xyz]`: 反向字符集, 如 "[abc]"匹配"plain"中的"a", "[^abc]"匹配"plain"中"p"，"l"，"i"，"n"
+      - `[a-z]`: 字符范围, `[^a-z]`: 反向范围字符
+      - `\b`: 匹配一个字边界, `\B`: 非字边界匹配, 如 "er\b"匹配"never"中的"er"，但不匹配"verb"中的"er"
+      - `\d`: 数字字符匹配, 等效于 [0-9], `\D`: 非数字字符匹配, 等效于 [^0-9]
+      - `\w`: 匹配任何字类字符, 包括下划线, 与"[A-Za-z0-9_]"等效, `\W`: 与任何非单词字符匹配
+      - `(pattern)`: 匹配 pattern 并捕获该匹配的子表达式, 如 `(\\d(\\d))\\2`, `\\2`代表引用前面的第2组匹配的值, "211"
+      - `(?:pattern)`: 匹配 pattern 但不捕获该匹配的子表达式，即它是一个非捕获匹配，不存储供以后使用的匹配, 如 `industr(?:y|ies)` 是比 `industry|industries` 更经济的表达式
+      - `(?=pattern)`: 非捕获匹配, 如 `Windows (?=95|98|NT|2000)` 匹配"Windows 2000"中的"Windows", 但不匹配"Windows 3.1"中的"Windows"
+      - `(?!pattern)`: 非捕获匹配, 如 `Windows (?!95|98|NT|2000)` 匹配"Windows 3.1"中的 "Windows"，但不匹配"Windows 2000"中的"Windows"
+      - [更多](https://www.runoob.com/java/java-regular-expressions.html)
+  - Matcher 类的方法
+    - 索引方法
+      - public int start() 返回以前匹配的初始索引
+      - public int end() 返回最后匹配字符之后的偏移量
+      - [例子](https://www.runoob.com/java/java-regular-expressions.html)
+    - 研究方法
+    - 替换方法
+      - replaceFirst 替换首次匹配，replaceAll 替换所有匹配
+      ``` Java
+        private static String REGEX = "dog";
+        private static String INPUT = "The dog says meow. " + "All dogs say meow.";
+        private static String REPLACE = "cat";
+
+        public static void main(String[] args) {
+          Pattern p = Pattern.compile(REGEX);
+          // get a matcher object
+          Matcher m = p.matcher(INPUT); 
+          INPUT = m.replaceAll(REPLACE);
+          System.out.println(INPUT);
+        }
+
+        The cat says meow. All cats say meow.
+      ```
 
 ### Java Method
   - 方法是解决一类问题的步骤的有序组合, 能使程序变得更简短而清晰, 有利于程序维护, 可以提高程序开发的效率和代码重用性
@@ -325,7 +400,16 @@
       $ java CommandLine this is a command line 200 -100
     ```
   - 可变参数: 在方法声明中，在指定参数类型后加一个省略号: `...`
-    > 一个方法中只能指定一个可变参数，它必须是方法的最后一个参数, 编译器会将其转型为一个数组
+    > 一个方法中只能指定一个可变参数，它必须是方法的最后一个参数, 编译器会将其转型为一个数组, 可向函数传递 0 个或多个参数
+    void function(String... args);
+    void function(String [] args);
+    这两个方法的命名是相等的，不能作为方法的重载
+
+    > 对于可变参数的方法重载: 
+    void function(String... args);
+    void function(String args1,String args2);
+    function("Wallen","John");
+    优先匹配固定参数的方法
   - finalize() 方法: 在对象被垃圾收集器析构(回收)之前调用, 用来清除回收对象
     ``` Java
       public class Test1 {
@@ -361,4 +445,5 @@
     ```
 
 ### Files IO
-  
+  - Stream: 一个流可以理解为一个数据的序列。输入流表示从一个源读取数据，输出流表示向一个目标写数据
+  - 
