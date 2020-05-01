@@ -445,5 +445,64 @@
     ```
 
 ### Files IO
-  - Stream: 一个流可以理解为一个数据的序列。输入流表示从一个源读取数据，输出流表示向一个目标写数据
-  - 
+  - Stream: 一个流可以理解为一个数据序列。输入流表示从一个源读取数据，输出流表示向一个目标写数据
+  - 读取控制台输入: System.in
+    - 获得一个绑定到控制台的字符流, `BufferedReader br = new BufferedReader(new InputStreamReader(System.in));`
+    - `read()` 方法从控制台读取一个字符, `readLine()` 方法读取一个字符串
+      ``` Java
+        // 使用 System.in 创建 BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String str;
+        System.out.println("Enter 'end' to quit.");
+        do {
+          str = br.readLine();
+          System.out.println(str);
+        } while (!str.equals("end"));
+      ```
+  - 控制台输出
+    - 控制台的输出由 print() 和 println() 完成, 由类 PrintStream 定义, System.out 是该类对象的一个引用
+  - 读写文件
+    - FileInputStream
+      - 使用**字符串类型**的文件名来创建一个输入流对象来读取文件: `InputStream fis = new FileInputStream("C:/java/hello");`
+      - 使用一个**文件对象**来创建: `InputStream fis2 = new FileInputStream(new File("C:/java/hello"));`
+    - FileOutputStream
+      - 使用**字符串类型**的文件名来创建一个输出流对象
+      - 使用一个**文件对象**来创建
+  - InputStreamWriter, OutputStreamWriter对象, 参数可以指定编码
+  - Java中的目录
+    - 创建目录
+      - mkdir()  方法创建一个文件夹
+      - mkdirs() 方法创建一个文件夹和它的所有父文件夹
+    - 读取目录
+      - 一个目录其实就是一个 File 对象, 它包含其他文件和文件夹
+      - 如果创建一个 File 对象并且它是一个目录, 那么调用 `isDirectory()` 方法会返回 true,  `String[] list()` 方法可提取它包含的文件和文件夹的列表, `File[] listFiles()` 用 File 对象形式返回目录下的指定类型的所有文件和文件夹
+    - 删除目录或文件
+      - java.io.File.delete() 方法删除文件
+      - 删除某一目录时, 必须保证该目录下没有其他文件才能正确删除
+        ``` Java
+          public static void main(String args[]) {
+              File folder = new File("/tmp/java/");  // 测试目录
+              deleteFolder(folder);
+          }
+      
+          // 删除文件及目录
+          public static void deleteFolder(File folder) {
+              File[] files = folder.listFiles();
+              if (files != null) {
+                  for (File f : files) {
+                      if (f.isDirectory()) {
+                          deleteFolder(f);
+                      } else {
+                          f.delete();
+                      }
+                  }
+              }
+              folder.delete();
+          }
+        ```
+
+  ![IO流的类层次图](https://www.runoob.com/wp-content/uploads/2013/12/iostream2xx.png)
+  
+### Java Scanner Class
+  - java.util.Scanner 是 Java5 的新特征, 可以获取用户的输入
+  -
