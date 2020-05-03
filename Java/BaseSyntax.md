@@ -481,7 +481,7 @@
       - 删除某一目录时, 必须保证该目录下没有其他文件才能正确删除
         ``` Java
           public static void main(String args[]) {
-              File folder = new File("/tmp/java/");  // 测试目录
+              File folder = new File("/tmp/java/");  // 测试的目录
               deleteFolder(folder);
           }
       
@@ -503,6 +503,60 @@
 
   ![IO流的类层次图](https://www.runoob.com/wp-content/uploads/2013/12/iostream2xx.png)
   
-### Java Scanner Class
-  - java.util.Scanner 是 Java5 的新特征, 可以获取用户的输入
-  -
+### Scanner Class
+  - java.util.Scanner 是 Java5 的新特征, 可以获取用户的输入, `Scanner s = new Scanner(System.in);`
+  - 通过 Scanner 类的 `next()` 与 `nextLine()` 方法获取输入的字符串，在读取前我们一般需要 使用 `hasNext` 与 `hasNextLine` 判断是否还有输入的数据
+  - next() 与 nextLine() 区别: 
+    - next(): 一定要读取到有效字符后才可以结束输入, 只有输入有效字符后才将其后面输入的空白作为分隔符或者结束符, 不能得到带有空格的字符串, 即遇到空格结束, 去除首空格
+    - nextLine(): 以Enter为结束符, 可以获得空白, 返回的是输入回车之前的所有字符
+  - 也支持输入 int 或 float 类型的数据, `hasNextXxx()`, `nextXxx()`
+    - 如: hasNextFloat(), nextFloat()
+  -  scan.close(); 记得关流
+
+### Exception
+  - 三种类型的异常: 
+    - **检查性异常(编译时异常)**: Exception类中除了 RuntimeException 类及其子类都是编译时异常, 特点是Java编译器会对其进行检查，如果出现异常就必须对异常进行处理，否则程序无法通过编译
+      - 使用try…catch语句对异常进行捕获
+      - 使用throws关键字声明抛出异常，调用者对其处理
+    - **运行时异常**: RuntimeException 类及其子类都是运行时异常, 特点是Java编译器不会对其进行检查, 一般是由程序中的逻辑错误引起的, 如数组角标越界
+    - **错误**: 不是异常, 而是脱离程序员控制的问题, 用来指示运行时环境发生的错误, 如OutOfMemoryError。异常能被程序本身处理, 错误是无法处理
+  - Exception 类的层次
+    ![Exception class hierarchy](https://www.runoob.com/wp-content/uploads/2017/09/690102-20160728164909622-1770558953.png)
+  - 捕获异常
+    - try/catch 代码块中的代码称为保护代码, catch 语句包含要捕获异常类型的声明
+    - 当保护代码块中发生一个异常时，try 后面的 catch 块就会被检查, 如果发生的异常包含在 catch 块中，异常会被传递到该 catch 块
+    - **多重捕获**: 一个 try 代码块后面跟随多个 catch 代码块。如果多个 catch 块中的异常出现继承关系，父类异常 catch 块放在最下面
+    - catch 里处理异常的时候不要简单的e.printStackTrace(), 而是应该进行详细的处理, 如进行 `console 打印详情`或者进行`日志记录`
+  - throws/throw 关键字
+    - 如果一个方法没有捕获到一个检查性异常, 那么该方法必须使用 throws 关键字来声明, 放在方法签名的尾部
+    - 也可以使用 throw 关键字抛出一个异常，无论它是新实例化的还是刚捕获到的
+  - finally 关键字
+    - 用来创建在 try 代码块后面执行的代码块, finally 代码块出现在 catch 代码块最后
+    - 无论是否发生异常，finally 代码块中的代码总会被执行
+    - finally 并非一定被执行, 如果 catch 块中有退出系统的语句 System.exit(-1); finally就不会被执行
+    - finally 永远都会在 catch 的 return 前被执行
+      ``` Java
+        try{
+          //待捕获代码    
+        }catch（Exception e）{
+            System.out.println("catch is begin");
+            return 1 ;
+        }finally{
+            System.out.println("finally is begin");
+            return 2 ;
+        }
+
+        catch is begin
+        finally is begin 
+        return 2
+      ```
+  - 自定义异常
+    - 所有异常都必须是 Throwable 的子类: 
+      - 如果希望写一个`检查性异常类`，则需要继承 `Exception` 类
+      - 如果你想写一个`运行时异常类`，那么需要继承 `RuntimeException` 类
+  - Java中定义了两种类型的异常和错误
+    - **JVM(Java虚拟机) 异常**：由 JVM 抛出的异常或错误, 如NullPointerException 类, ClassCastException 类
+    - **程序级异常**：由程序或者API程序抛出的异常, 如 IllegalArgumentException 类, IllegalStateException 类
+
+### Extends/Implements
+  - 
