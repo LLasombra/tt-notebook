@@ -407,7 +407,7 @@
 
     > 对于可变参数的方法重载: 
     void function(String... args);
-    void function(String args1,String args2);
+    void function(String args1, String args2);
     function("Wallen","John");
     优先匹配固定参数的方法
   - finalize() 方法: 在对象被垃圾收集器析构(回收)之前调用, 用来清除回收对象
@@ -665,3 +665,75 @@
     - import 语句应位于 package 语句之后，类的定义之前
     - 类文件中可以包含任意数量的 import 声明
   - 通常一个公司使用它互联网域名的颠倒形式来作为它的包名. 例如：互联网域名是 runoob.com，所有的包名都以 com.runoob 开头
+
+### Java Generics
+  - 泛型方法
+    - 泛型提供了编译时类型安全检测机制，该机制允许程序员在编译时检测到非法的类型。泛型的本质是参数化类型
+    - 类型参数声明在方法返回类型之前，类型参数只能代表引用型类型。
+      ``` Java
+      public <T> void printArray(T[] array) {
+          for (T t : array) {
+              System.out.printf("%s ", t);
+          }
+      }
+
+      // <T, V> 类型参数声明部分, V 返回值类型, (T[] array, V v) 实际参数类型的占位符
+      public <T, V> V printArray(T[] array, V v) {
+          for (T t : array) {
+              System.out.printf("%s ", t);
+          }
+
+          System.out.printf("%s ", v);
+          System.out.println();
+          return v;
+      }
+      ```
+    - 有界的类型参数: 限制被允许传递到一个类型参数的类型种类范围
+      ``` Java
+      public static <T extends Comparable<T>> T maximum(T x, T y, T z)
+      ```
+  - 泛型类
+    - 泛型类的声明和非泛型类的声明类似，除了在类名后面添加类型参数声明部分
+      ``` Java
+      public class Box<T> {
+        private T t;
+  
+        public void add(T t) {
+          this.t = t;
+        }
+      
+        public T get() {
+          return t;
+        }
+      }
+
+      Box<Integer> integerBox = new Box<Integer>();
+      Box<String> stringBox = new Box<String>();
+      integerBox.add(new Integer(10));
+      stringBox.add(new String("aaa"))
+      ```
+  - 类型通配符
+    - 类型通配符一般是使用 ? 代替具体的类型参数。例如 List<?> 在逻辑上是List<String>,List<Integer> 等所有List<具体类型实参>的父类。
+      ``` Java
+      public static void getData(List<?> data) {}
+      ```
+    - 类型通配符上限, 表示类型只能接受 Number 及其下层子类类型 `public static void getUperNumber(List<? extends Number> data)`, 如：Number, Integer
+    - 类型通配符下限, 表示类型只能接受 Number 及其上层父类类型 `List<? super Number>`, 如：Number, Object
+  - **泛型方法 VS 类型通配符**，两者可以混用，两者最明显的区别：
+    - ? 泛型对象是只读的，不可修改，因为?类型是不确定的，可以代表范围内任意类型
+    - 而泛型方法中的泛型参数对象是可修改的，因为类型参数T是确定的（在调用方法时确定），因为T可以用范围内任意类型指定
+    - 一般只读就用?，要修改就用泛型方法，例如一个进行修改的典型的泛型方法的例子：
+      ``` Java
+      public <T> void func(List<T> list, T t) {
+        list.add(t);
+      }
+      ```
+    - 对泛型方法的类型参数进行规约：即有时候可能不必使用泛型方法的地方你不小心麻烦地写成了泛型方法，而此时你可以将其规约成使用 ? 的最简形式，例如：
+      ``` Java
+      // 这里E只在形参中出现了一次，并且没有任何其他东西（方法形参、返回值）依赖它，那么就可以把E规约成?
+      <T, E extends T> void func(List<T> list1, List<E> list2);
+      // 最终规约的结果就是：
+      <T> void func(List<T> list1, List<? extends T> list2);
+      ```
+
+### Serialization
