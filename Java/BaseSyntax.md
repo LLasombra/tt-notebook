@@ -737,3 +737,41 @@
       ```
 
 ### Serialization
+  - 序列化: 一个对象可以被表示为一个字节序列，该字节序列包括该对象的数据、有关对象的类型信息和存储在对象中数据的类型。
+  - 一个类的对象要想序列化成功，必须满足：
+    - 该类实现 java.io.Serializable 接口。方便以后将该类持久化，或者将其用于转为字节数组，用于网络传输
+    - 该类的所有属性是可序列化的，如果有一个属性不是可序列化的，则该属性必须被 transient（瞬态）修饰，然后该值将不会被发送到输出流 `private transient String name;`
+  - 序列化对象
+    - 如 ObjectOutputStream 类用来序列化一个对象
+    - 当序列化一个对象到文件时， 按照 Java 的标准约定是给文件一个 .ser 扩展名
+      ``` Java
+      FileOutputStream fileOut = new FileOutputStream("/tmp/employee.ser");
+      ObjectOutputStream out = new ObjectOutputStream(fileOut);
+      out.writeObject(new Employee("Reyan Ali"));
+      ```
+  - 反序列化对象
+    ``` Java
+    FileInputStream fileIn = new FileInputStream("/tmp/employee.ser");
+    ObjectInputStream in = new ObjectInputStream(fileIn);
+    Employee e = (Employee) in.readObject();
+    ```
+  - 被写对象的类型是String，或Array，或Enum，或Serializable，那么就可以对该对象进行序列化，否则将抛出NotSerializableException
+  - SerializableID 号是根据类的特征和类的签名算出来的，是给类加上 id 用的，用于判断类和对象是否是同一个版本
+  - 被 static 修饰的成员变量无法序列化，无法写到文件
+
+### Networking
+  - 网络编程是指编写运行在多个设备（计算机）的程序，这些设备都通过网络连接起来。java.net 包中 J2SE 的 API 包含有类和接口，它们提供低层次的通信细节
+  - java.net 包中提供了两种常见的网络协议：
+    - TCP: 是传输控制协议的缩写, 它保障了两个应用程序之间的可靠通信。通常用于互联网协议，被称 TCP/IP
+    - UDP: 是用户数据报协议的缩写，一个无连接的协议。提供了应用程序之间要发送的数据的数据包
+  - Socket(套接字) 编程
+    1. 服务器实例化一个 ServerSocket 对象，表示通过服务器上的端口通信。
+    2. 服务器调用 ServerSocket 类的 accept() 方法，该方法将一直等待，直到客户端连接到服务器上给定的端口。
+    3. 服务器正在等待时，一个客户端实例化一个 Socket 对象，指定服务器名称和端口号来请求连接。
+    4. Socket 类的构造函数试图将客户端连接到指定的服务器和端口号。如果通信被建立，则在客户端创建一个 Socket 对象能够与服务器进行通信。
+    5. 在服务器端，accept() 方法返回服务器上一个新的 socket 引用，该 socket 连接到客户端的 socket。每一个socket都有一个输出流和一个输入流，客户端的输出流连接到服务器端的输入流，而客户端的输入流连接到服务器端的输出流。
+  - URL(统一资源定位符)处理: `protocol://host:port/path?query#fragment`
+  - URLConnections: openConnection() 返回一个 java.net.URLConnection
+
+### Thread
+  - 

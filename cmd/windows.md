@@ -59,6 +59,7 @@ ssh -T git@github.com  测试
     Port 443
     ```
 9. push 提示输入密码,可使用以下命令解决: git config --global credential.helper store
+10. git checkout -b 本地分支名 origin/远程分支名  从远程仓库里拉取一条本地不存在的分支
 
 a) 执行增加命令，如下：git add . `不包括被删除的文件` / git add -A `包括被删除的文件`  
 b) 执行提交命令，如下：git commit -m ""
