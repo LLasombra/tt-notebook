@@ -773,5 +773,71 @@
   - URL(统一资源定位符)处理: `protocol://host:port/path?query#fragment`
   - URLConnections: openConnection() 返回一个 java.net.URLConnection
 
-### Thread
-  - 
+### Multi Thread
+  - 进程：一个进程包括由操作系统分配的内存空间，包含一个或多个线程。一个进程一直运行，直到所有的非守护线程都结束运行后才能结束
+  - 线程：一个线程指的是进程中一个单一顺序的控制流。一个线程不能独立的存在，它必须是进程的一部分
+  - 线程的生命周期：线程是一个动态执行的过程，它也有一个从产生到死亡的过程：
+    ![线程生命周期](https://www.runoob.com/wp-content/uploads/2014/01/java-thread.jpg)
+    - 新建状态 New: 使用 new 关键字和 Thread 类或其子类建立一个线程对象
+    - 就绪状态 Runnable: 调用了 start() 方法之后
+    - 运行状态 Running: 获取 CPU 资源，执行 run()。如果 CPU 时间片用完，线程将重新进入就绪状态获取CPU时间片。
+    - 阻塞状态 Blocked
+      - 等待阻塞: 运行状态中的线程执行 wait() 方法
+      - 同步阻塞: 在获取 synchronized 同步锁失败
+      - 其他阻塞: 调用线程的 sleep() 或 join() 或发出了 I/O 请求时
+    - 死亡状态 Dead: 一个运行状态的线程完成任务或者其他终止条件发生时
+  - 创建线程的三种方式：
+    - **继承 Thread 类**
+      继承类必须重写 run() 方法, 调用 start() 方法执行
+    - **实现 Runnable 接口**
+      `Thread(Runnable threadOb,String threadName);`
+      > threadOb 是一个实现 Runnable 接口的类的实例，并且 threadName 指定新线程的名字
+      ``` Java
+      class RunnableDemo implements Runnable {
+        public void run() {}
+      }
+
+      main() {
+        RunnableDemo R1 = new RunnableDemo();
+        Thread t = new Thread (R1, threadName);
+        t.start();
+      }
+      ```
+    - **通过 Callable 和 Future 创建线程**
+      - 创建 Callable 接口的实现类，并实现 call() 方法，该 call() 方法将作为线程执行体，并且有返回值
+      - 创建 Callable 实现类的实例，使用 FutureTask 类来包装 Callable 对象，该 FutureTask 对象封装了该 Callable 对象的 call() 方法的返回值
+      - 使用 FutureTask 对象作为 Thread 对象的 target 创建并启动新线程
+      - 调用 FutureTask 对象的 get() 方法来获得子线程执行结束后的返回值
+      ``` Java
+      public class CallableThreadTest implements Callable<Integer> {
+        public static void main(String[] args) {
+          CallableThreadTest ctt = new CallableThreadTest();
+          FutureTask<Integer> ft = new FutureTask<>(ctt);
+
+          new Thread(ft, "有返回值的线程").start();
+          System.out.println("子线程的返回值：" + ft.get());
+        }
+
+        @Override  
+        public Integer call() throws Exception { ... }
+      }
+      ```
+    ![](https://www.runoob.com/wp-content/uploads/2014/09/716271-20170320112245721-1831918220.jpg)
+  - 线程池: 主要用来解决线程生命周期开销问题和资源不足问题
+  - 线程安全：
+    - 同步代码块 synchronized
+    - 使用 Lock 锁: Lock 锁需要（在 finally 代码块中）手动释放。Lock 提供了比使用 synchronized 方法和语句可获得的更广泛的锁定操作
+      > Lock 接口中的方法:
+      ``` Java
+      void lock()   // 获取锁 
+      void unlock() // 释放锁
+      ```
+      > Lock 接口的实现类:
+      ``` Java
+      java.util.concurrent.locks.ReentrantLock implements Lock
+      ```
+      1. 在成员位置创建一个 ReentrantLock 对象。
+      2. 在可能出现线程安全问题的代码前，调用 Lock 接口中的方法 lock 获取锁对象。
+      3. 在可能出现线程安全问题的代码后，调用 Lock 接口中的方法 unlock 释放锁对象。
+
+### Applet
