@@ -841,3 +841,40 @@
       3. 在可能出现线程安全问题的代码后，调用 Lock 接口中的方法 unlock 释放锁对象。
 
 ### Applet
+  - Applet 是一种 Java 程序。它一般运行在支持 Java 的 Web 浏览器内。因为它有完整的 Java API支持,所以Applet 是一个全功能的 Java 应用程序。
+  - Applet 被设计为嵌入在一个 HTML 页面
+  - 生命周期：
+    - init: 提供所需的任何初始化。在 Applet 标记内的 `<param>` 标签被处理后调用该方法
+    - start: 浏览器调用 init 方法后，该方法被自动调用。每当用户从其他页面返回到包含 Applet 的页面时，则调用该方法
+    - stop: 当用户从包含 Applet 的页面移除的时候，该方法自动被调用
+    - destroy: 此方法仅当浏览器正常关闭时调用
+    - paint: 该方法在 start() 方法之后立即被调用，或者在 Applet 需要重绘在浏览器的时候调用。paint() 方法实际上继承于 java.awt
+
+### Documentation
+  - 单行注释：`//`
+  - 多行注释：`/*   */`
+  - 文档注释：`/**  */`
+    - @author 标识一个类的作者
+    - @version 指定类的版本
+    - @exception 标志一个类抛出的异常
+    - @param 说明一个方法的参数
+    - @return 说明返回值类型
+    > 在经过 javadoc 处理之后，SquareNum 类的注释将在 SquareNum.html 中找到
+    ``` Java
+    /**
+    * 这个类演示了文档注释
+    * @author Ayan Amhed
+    * @version 1.2
+    */
+    public class SquareNum {
+      /**
+      * This method demonstrates square().
+      * @param args Unused.
+      * @return Nothing.
+      * @exception IOException On input error.
+      * @see IOException
+      */
+      public static void main(String args[]) throws IOException { ... }
+    }
+    ```
+
