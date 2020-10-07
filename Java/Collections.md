@@ -37,3 +37,47 @@
   - java.util 包下的集合类都是 **快速失败（fail—fast）** 的，不能在多线程下发生并发修改（迭代过程中被修改）
   - java.util.concurrent 包下的容器都是 **安全失败（fail—safe）**，可以在多线程下并发使用，并发修改
 ![集合框架图](https://www.runoob.com/wp-content/uploads/2014/01/2243690-9cd9c896e0d512ed.gif)
+
+### ArrayList
+  - ArrayList 类继承了 AbstractList，并实现了 List 接口。是一个可以动态修改的数组，与普通数组的区别就是它是没有固定大小的限制，我们可以添加或删除元素
+  - `ArrayList<E>` E 只能为引用数据类型
+![ArrayList](https://www.runoob.com/wp-content/uploads/2020/06/ArrayList-1-768x406-1.png)
+
+### LinkedList
+  - 链表（Linked list）是一种常见的基础数据结构，是一种线性表，但是并不会按线性的顺序存储数据，而是在每一个节点里存到下一个节点的地址。可分单向链表和双向链表
+    - 一个单向链表包含两个值: 当前节点的值和一个指向下一个节点的链接
+    - 一个双向链表有三个整数值: 数值、向后的节点链接、向前的节点链接
+  - LinkedList（链表） 类似于 ArrayList，是一种常用的数据容器。与 ArrayList 相比，LinkedList 的增加和删除对操作效率更高，而查找和修改的操作效率较低
+  - 更多的情况下我们使用 ArrayList 访问列表中的随机元素更加高效，但以下几种情况 LinkedList 提供了更高效的方法
+    - 使用 addFirst() 在头部添加元素
+    - 使用 addLast() 在尾部添加元素
+    - 使用 removeFirst() 移除头部元素
+    - 使用 removeLast() 移除尾部元素
+    - 使用 getFirst() 获取头部元素
+    - 使用 getLast() 获取尾部元素
+![LinkedList](https://www.runoob.com/wp-content/uploads/2020/06/20190328164737.png)
+
+### HashSet
+  - HashSet 基于 HashMap 来实现的，是一个不允许有重复元素的集合，是无序的，即不会记录插入的顺序
+  - 不是线程安全的， 如果多个线程尝试同时修改 HashSet，则最终结果是不确定的。必须在多线程访问时显式同步对 HashSet 的并发访问
+  - 允许有 null 值
+![HashSet](https://www.runoob.com/wp-content/uploads/2020/07/java-hashset-hierarchy.png)
+
+### HashMap
+  - HashMap 是一个散列表，它存储的内容是键值对(key-value)映射
+  - HashMap 实现了 Map 接口，根据键的 HashCode 值存储数据，具有很快的访问速度，最多允许一条记录的键为 null，不支持线程同步
+  - HashMap 是无序的，即不会记录插入的顺序。继承于AbstractMap，实现了 Map、Cloneable、java.io.Serializable 接口
+![HashMap](https://www.runoob.com/wp-content/uploads/2020/07/WV9wXLl.png)
+
+### Iterator
+  - Iterator（迭代器）不是一个集合，它是一种用于访问集合的方法，可用于迭代 ArrayList 和 HashSet 等集合
+    - 获取迭代器 `Iterator<String> it = list.iterator();`
+    - 调用 it.hasNext() 用于检测集合中是否还有元素。
+    - 调用 it.next() 会返回迭代器的下一个元素，并且更新迭代器的状态。
+    - 调用 it.remove() 将迭代器返回的元素删除。
+    ``` Java
+    // 让迭代器 it 逐个返回集合中所有元素最简单的方法是使用 while 循环：
+    while(it.hasNext()) {
+        System.out.println(it.next());
+    }
+    ```
