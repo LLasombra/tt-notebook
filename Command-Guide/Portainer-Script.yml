@@ -1,0 +1,192 @@
+version: '2'
+services:
+  notificationservice:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/velo-notification-service:20201211.a5868e"
+    container_name: "dev1-notificationservice"
+    ports:
+      - "5007:80"
+#  mmCasinoDataService:
+#    environment:
+#      - ASPNETCORE_ENVIRONMENT=dev1
+#    image: "velopoc.azurecr.io/velo/mm-casino-data-service:20200311.eac276"
+#    container_name: "dev1-mmCasinoDataService"
+#    ports:
+#      - "5124:80"
+#  veloCasinoDataConnector:
+#    environment:
+#      - ASPNETCORE_ENVIRONMENT=dev1
+#    image: "velopoc.azurecr.io/velo/velo-casino-data-connector:20200311.da4ad7"
+#    container_name: "dev1-veloCasinoDataConnector"
+#    ports:
+#      - "5002:80"
+#  veloCasinoDataConnectorScheduler:
+#    environment:
+#      - ASPNETCORE_ENVIRONMENT=dev1
+#    image: "velopoc.azurecr.io/velo/velo-casino-connector-scheduler:20200311.da4ad7"
+#    container_name: "dev1-veloCasinoDataConnectorScheduler"
+#    ports:
+#      - "9999:80"
+  patron-management:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+      - CC2V2Source__Timeout=30000
+    image: "velopoc.azurecr.io/velo/patron-management-crown:20210127.f4ed7e"
+    container_name: "dev1-patron-management"
+    ports:
+      - "6002:80"
+    volumes:
+      - "/srv/docker/patron-management/log/:/app/Log"
+  patron-integration:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/patron-integration-crown:20210127.f4ed7e"
+    container_name: "dev1-patron-integration"
+    ports:
+      - "6003:80"
+    volumes:
+      - "/srv/docker/patron-integration/log/:/app/Log"
+  table-integration:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/table-lifecycle-rating-crown:20210127.f4ed7e"
+    container_name: "dev1-table-integration"
+    ports:
+      - "6004:80"
+    volumes:
+      - "/srv/docker/table-integration/log/:/app/Log"
+  table-fillcredit:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/table-fillcredit-crown:20210127.f4ed7e"
+    container_name: "dev1-table-fillcredit"
+    ports:
+      - "6005:80"
+    volumes:
+      - "/srv/docker/table-fillcredit/log/:/app/Log"
+  table-operation-tool:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/table-operation-tool-crown:20210127.f4ed7e"
+    container_name: "dev1-table-operation-tool"
+    ports:
+      - "6006:80"
+    volumes:
+      - "/srv/docker/table-operation-tool/log/:/app/Log"
+  table-buyin:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/patron-transaction-program-crown:20210127.f4ed7e"
+    container_name: "dev1-table-buyin"
+    ports:
+      - "6007:80"
+    volumes:
+      - "/srv/docker/table-buyin/log/:/app/Log"
+  table-configuration:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/table-configuration-crown:20210127.f4ed7e"
+    container_name: "dev1-table-configuration"
+    ports:
+      - "6008:80"
+    volumes:
+      - "/srv/docker/table-configuration/log/:/app/Log"
+  employee-integration:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/employee-integration-crown:20210127.f4ed7e"
+    container_name: "dev1-employee-integration"
+    ports:
+      - "6009:80"
+    volumes:
+      - "/srv/docker/employee-integration/log/:/app/Log"
+  table-message-integration:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/table-message-crown:20210127.f4ed7e"
+    container_name: "dev1-table-message-integration"
+    ports:
+      - "6010:80"
+    volumes:
+      - "/srv/docker/table-message-integration/log/:/app/Log"
+  velo-data-service:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/velo-data-crown:20201208.45901d"
+    container_name: "dev1-velo-data-service"
+    ports:
+      - "6011:80"
+    volumes:
+      - "/srv/docker/velo-data-service/log/:/app/Log"
+  velo-rating-service:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/velo-rating-crown:20210126.387953"
+    container_name: "dev1-velo-rating-service"
+    ports:
+      - "6012:80"
+    volumes:
+      - "/srv/docker/velo-rating-service/log/:/app/Log"
+  velo-ApacheDS:
+    image: "velopoc.azurecr.io/velo/apacheds:20200212.c8571b"
+    container_name: "dev1-velo-apacheds"
+    ports:
+      - "10389:10389"
+  ei-esb:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/camp-esb-table/dev1:20201218.3b15a5"
+    container_name: "dev1-ei-esb"
+    ports:
+      - "8010:8010"
+      - "7973:7973"
+      - "9493:9493"
+      - "9173:9173"
+    volumes:
+      - "/srv/docker/camp-ei-esb/log/:/home/wso2carbon/wso2ei-6.6.0/repository/logs"
+  ei-esb-mm:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/camp-esb-table/dev1:20200727.fb3c00"
+    container_name: "dev1-ei-esb-mm"
+    ports:
+      - "8011:8010"
+      - "7974:7973"
+      - "9494:9493"
+      - "9174:9173"
+    volumes:
+      - "/srv/docker/camp-ei-esb-mm/log/:/home/wso2carbon/wso2ei-6.5.0/repository/logs"
+  ei-is:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/camp-is/dev1:20201023.288b40"
+    container_name: "dev1-ei-is"
+    ports:
+      - "9764:9764"
+      - "9444:9444"
+    volumes:
+      - "/srv/docker/camp-ei-is/log/:/home/wso2carbon/wso2is-5.8.0/repository/logs"
+      - "/srv/docker/camp-ei-is/resources/security/client-truststore.jks:/home/wso2carbon/wso2is-5.8.0/repository/resources/security/client-truststore.jks"
+      - "/srv/docker/camp-ei-is/deployment/server/userstores/user-store.xml:/home/wso2carbon/wso2is-5.8.0/repository/deployment/server/userstores/user-store.xml"
+  ei-is-mm:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+    image: "velopoc.azurecr.io/velo/camp-is/dev1-mm:20201023.288b40"
+    container_name: "dev1-ei-is-mm"
+    ports:
+      - "9765:9764"
+      - "9445:9444"
+    volumes:
+      - "/srv/docker/camp-ei-is-mm/log/:/home/wso2carbon/wso2is-5.8.0/repository/logs"
+      - "/srv/docker/camp-ei-is-mm/resources/security/client-truststore.jks:/home/wso2carbon/wso2is-5.8.0/repository/resources/security/client-truststore.jks"
+  rabbitmq:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev1
+      - RABBITMQ_DEFAULT_USER=velo
+      - RABBITMQ_DEFAULT_PASS=velo
+    image: rabbitmq:3.8-management
+    container_name: dev1-rabbitmq
+    ports:
+      - 15672:15672
+      - 8001:5672

@@ -1,11 +1,11 @@
-## sqlserver
-- query by column name
-```sql
+## SQLServer
+- **Query by column name**
+``` SQL
 select [name] from Local_Mockup_Casino.[dbo].sysobjects where id in(select id from Local_Mockup_Casino.[dbo].syscolumns Where name = 'IsPeriodicRackCountReminderEnabled')
 ```
 
-- query by column value
-```sql
+- **Query by column value**
+``` SQL
 DECLARE @SearchStr nvarchar(100)
 SET @SearchStr = '/Media/Default/images'
 CREATE TABLE #Results (ColumnName nvarchar(370), ColumnValue nvarchar(3630))
